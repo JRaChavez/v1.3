@@ -1,0 +1,42 @@
+﻿@model Info_Net.Models.Package
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Package</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NombrePack)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombrePack)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Banda)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Banda)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Precio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Precio)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Package_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
