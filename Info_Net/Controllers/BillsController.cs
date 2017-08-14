@@ -25,6 +25,7 @@ namespace Info_Net.Controllers
 			var report = this.GenerateBillsReport();
 			var stream = report.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
 			return File(stream, "application/pdf");
+		
 		}
 		//WORD
 		public ActionResult DOC()

@@ -6,37 +6,34 @@ using System.Web;
 
 namespace Info_Net.Clases
 {
-    public class FilesHelper
-    {
-        /*public static bool UploadFoto(HttpPostedFileBase file, string folder, string name)
-        {
-            if (file == null || string.IsNullOrEmpty(folder) || string.IsNullOrEmpty(name))
-            {
-                return false;
-            }
+	public class FilesHelper
+	{
+		internal object ImagenFile;
 
-            try
-            {
-                string path = string.Empty;
-                if (file != null)
-                {
-                    path = Path.Combine(HttpContext.Current.Server.MapPath(folder), name);
-                    file.SaveAs(path);
+		public static string UploadPhoto(HttpPostedFileBase file, string folder)
+		{
+			string path = string.Empty;
+			string pic = string.Empty;
 
-                    using (MemoryStream ms = new MemoryStream())
-                    {
-                        file.InputStream.CopyTo(ms);
-                        byte[] array = ms.GetBuffer();
-                    }
-                }
-                return true;
-            }
-            catch (Exception)
-            {
+			if (file != null)
+			{
+				pic = Path.GetFileName(file.FileName);
+				path = Path.Combine(HttpContext.Current.Server.MapPath(folder), pic);
+				file.SaveAs(path);
+				using (MemoryStream ms = new MemoryStream())
+				{
+					file.InputStream.CopyTo(ms);
+					byte[] array = ms.GetBuffer();
+				}
+			}
 
-                return false;
-            }
-        }*/
-    }
-}
+			return pic;
+		}
+
+		internal static string UploadPhoto(object imagenFile, string folder)
+		{
+			throw new NotImplementedException();
+		}
+	}
+	}
    

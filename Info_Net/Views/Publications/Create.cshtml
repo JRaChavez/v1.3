@@ -6,8 +6,7 @@
 
 <h2>Create</h2>
 
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create", "Publications", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
@@ -47,13 +46,16 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Imagen, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Imagen, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Imagen, "", new { @class = "text-danger" })
-            </div>
-        </div>
+		<div class="form-group">
+			@Html.LabelFor(model => model.ImagenFile, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				<span class="btn btn-default btn-file">
+					@Html.TextBoxFor(modelo => modelo.ImagenFile, new { type = "file" })
+				</span>
+			</div>
+		</div>
+
+
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

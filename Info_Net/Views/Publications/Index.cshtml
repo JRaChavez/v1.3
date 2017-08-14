@@ -44,7 +44,11 @@
             @Html.DisplayFor(modelItem => item.Contenido)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Imagen)
+            @if (!string.IsNullOrEmpty(item.Imagen))
+			{
+				<img src="@Url.Content(item.Imagen)" alt="Imagen" style="width:100px;height:150px;max-width: 100%; height: auto;" />
+			}
+
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Publication_id }) |

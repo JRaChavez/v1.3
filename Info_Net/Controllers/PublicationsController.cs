@@ -7,15 +7,17 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Info_Net.Models;
+using Info_Net.Clases;
 
 namespace Info_Net.Controllers
 {
     public class PublicationsController : Controller
     {
         private InfoNetContex db = new InfoNetContex();
+		private FilesHelper view =new FilesHelper();
 
-        // GET: Publications
-        public ActionResult Index()
+		// GET: Publications
+		public ActionResult Index()
         {
             return View(db.Publications.ToList());
         }
@@ -36,6 +38,7 @@ namespace Info_Net.Controllers
         }
 
         // GET: Publications/Create
+		[Authorize]
         public ActionResult Create()
         {
             return View();
@@ -48,7 +51,16 @@ namespace Info_Net.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Publication_id,Nombre,Titulo,Description,Contenido,Imagen")] Publication publication)
         {
-            if (ModelState.IsValid)
+			var pic = string.Empty;
+			var folder = "~/Content/Fotos";
+
+			if (view.ImagenFile != null)
+			{
+				pic = FilesHelper.UploadPhoto(view.ImagenFile, folder);
+				pic = string.Format("{0}/{1}", folder, pic);
+			}
+
+			if (ModelState.IsValid)
             {
                 db.Publications.Add(publication);
                 db.SaveChanges();

@@ -15,7 +15,7 @@
         <h4>Bill</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-		@Html.ActionLink("PDF","PDF", new { }, new { @class ="btn btn-default", target="_blank"})
+		
         <div class="form-group">
             @Html.LabelFor(model => model.Nombres, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
