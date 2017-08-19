@@ -4,38 +4,89 @@
 <head>
 	<title></title>
 	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="~/Content/styles.css" />
 	<script type="text/javascript" src="jquery.js"></script>
 	<script type="text/javascript" src="jquery-ui.js"></script>
-	<script type="text/javascript">
-$(function(){
-     $(".slider #1").show("fade",500);
-     $(".slider #1").delay(5500).hide("slide",{direction: "left"},500);
-
-        var sc = $(".slider img").size();
-        var count = 2
-
-        setInterval(function(){
-            $(".slider #"+count).show("slide",{direction:"right"},500);
-            $(".slider #"+count).delay(5500).hide("slide",{direction: "left"},500);
-
-if(count==sc)
-   count=1
-else
-   count=count+1
-        },6500);
-    });
-
-	</script>
+	<script type="text/javascript" src="~/Content/banner-master/js/jquery.js"></script>
+	<script type="text/javascript" src="~/Content/banner-master/js/banner.js"></script>
 
 </head>		
 <body>
-<div class="jumbotron">
-    <h1>INFO NET</h1>
-    <p class="lead"><h3>Carrusel sobre destacados del admin</h3> 
-		<img src="@Url.Content("~/Content/Fotos/foto1.jpg")" style="width:200px;height:450px;max-width: 100%;height:auto;" alt="imgf" /></p>
-	
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+	<div class="row">
+		<center><h1>Nuestra historia</h1></center>
+		<p>
+			Comunicaciones del Sur es una empresa que nació en Axochiapan, Morelos en el 2016.
+			El principal objetivo fue enlazar con la red y tecnología a localidades que carecen de este extraordinario servicio
+			por estar alejados a cientos de kilómetros de distancia de la gran ciudad. Fue el comienzo de un sueño en común con
+			la población de estas comunidades.
+			Las telecomunicaciones pasaron a ser necesarias en la vida cotidiana y cada día se evoluciona más en este tema haciendo
+			que millones y millones de personas nos comuniquemos ya sea a través del internet o una simple llamada hacia el resto
+			del mundo.
+		</p>
+	</div>
+	<div id="testimonials" class="testimonials-section">
+		<div class="container">
+			<h2 class="section-title text-center">"Nuestro Equipo"</h2>
+			<div class="item center-block">
+				<div class="profile-holder">
+					
+					<img class="profile-image" src="~/Content/images/profile-1.png" />
+				</div>
+				<div class="quote-holder">
+					<blockquote class="quote">
+						<p>Testimonial goes here Donec felis odio, sagittis eu cursus ac, porttitor eu purus. In a bibendum dui. Nullam id est sed felis rutrum tincidunt eu nec nisi morbi euismod semper neque sed lobortis.</p>
+						<div class="quote-source">
+							<span class="name">JohnK,</span>
+							<span class="meta">San Francisco</span>
+						</div><!--//quote-source-->
+					</blockquote>
+				</div><!--//quote-holder-->
+			</div><!--//item-->
+			<div class="item item-reversed center-block">
+				<div class="profile-holder">
+					<img class="profile-image" src="~/Content/images/profile-2.png" alt="profile">
+				</div>
+				<div class="quote-holder">
+					<blockquote class="quote">
+						<p>Testimonial goes here fermentum sed pharetra in, aliquet sodales quam. Ut sed turpis quis orci viverra aliquet interdum ut ipsum. </p>
+						<div class="quote-source">
+							<span class="name">LisaWhite,</span>
+							<span class="meta">London</span>
+						</div><!--//quote-source-->
+					</blockquote>
+				</div><!--//quote-holder-->
+			</div><!--//item-->
+			<div class="item center-block">
+				<div class="profile-holder">
+					<img class="profile-image" src="~/Content/images/profile-3.png" alt="profile">
+				</div>
+				<div class="quote-holder">
+					<blockquote class="quote">
+						<p>Testimonial goes here vestibulum non hendrerit lorem, luctus tincidunt erat. Sed pharetra aliquam posuere. Pellentesque sollicitudin.</p>
+						<div class="quote-source">
+							<span class="name">MattH,</span>
+							<span class="meta">Berlin</span>
+						</div><!--//quote-source-->
+					</blockquote>
+				</div><!--//quote-holder-->
+			</div><!--//item-->
+			<div class="item item-reversed center-block">
+				<div class="profile-holder">
+					<img class="profile-image" src="~/Content/images/profile-4.png" alt="profile">
+				</div>
+				<div class="quote-holder">
+					<blockquote class="quote">
+						<p>Testimonial goes here lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis</p>
+						<div class="quote-source">
+							<span class="name">RyanW,</span>
+							<span class="meta">Paris</span>
+						</div><!--//quote-source-->
+					</blockquote>
+
+				</div><!--//quote-holder-->
+			</div><!--//item-->
+		</div><!--//container-->
+	</div><!--//testimonials-->
 
 		<div class="row">
 			<div class="col-md-4">
@@ -46,7 +97,8 @@ else
 						enables a clean separation of concerns and gives you full control over markup
 						for enjoyable, agile development.
 					</p>
-					<div><img src="@Url.Content("~/Content/Fotos/foto2.jpg")" style="width:200px;height:450px;max-width: 100%;height:auto;" alt="imgf" /></p></div>
+					<div><img src="@Url.Content("~/Content/Fotos/foto2.jpg")" style="width:200px;height:450px;max-width: 100%;height:auto;" alt="imgf" /></div>
+					
 				</div>
 				<p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
 			</div>

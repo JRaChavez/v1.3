@@ -10,44 +10,84 @@ using Info_Net.Models;
 using CrystalDecisions.CrystalReports.Engine;
 using System.Configuration;
 using System.Data.SqlClient;
+using CrystalDecisions.Shared;
 
 namespace Info_Net.Controllers
 {
     public class BillsController : Controller
     {
         private InfoNetContex db = new InfoNetContex();
-
-
+		private Reports.BillsReport crBillsReport { get; set; }
+		
 		//REport
 		//PDF
 		public ActionResult PDF()
 		{
 			var report = this.GenerateBillsReport();
-			var stream = report.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+			var stream = report.ExportToStream(CrystalDecisions.Shared.ExportFormatType.WordForWindows);
 			return File(stream, "application/pdf");
-		
+			/*
+			 * ExportOptions exportOptions = crProducto.ExportOptions;
+                    DiskFileDestinationOptions diskFileDestinationOptions = new DiskFileDestinationOptions();
+                    CrystalDecisions.Shared.PdfRtfWordFormatOptions formatTypeOptions = new PdfRtfWordFormatOptions();
+                    //destino
+                    diskFileDestinationOptions.DiskFileName = saveFileDialog1.FileName;
+                    exportOptions.ExportDestinationType = ExportDestinationType.DiskFile;
+                    exportOptions.ExportFormatType = ExportFormatType.PortableDocFormat;
+                    exportOptions.DestinationOptions = diskFileDestinationOptions;
+                    exportOptions.FormatOptions = formatTypeOptions;
+			 */
 		}
 		//WORD
 		public ActionResult DOC()
 		{
-			var report = this.GenerateBillsReport();
-			var stream = report.ExportToStream(CrystalDecisions.Shared.ExportFormatType.WordForWindows);
-			return File(stream, "application/doc","Contisacion.doc");
+			//this.crBillsReport = new Reports.BillsReport();
+			//crBillsReport.Viewcar
+			var report = this.GenerateBillsReport();//-> Esto para que es?
+
+			// es un seb proceso del crystal para la exportacion del reporte al formtao que se le asigna por medio de la clase
+			//ReportClass GenerateBillsReport() que es la que se encarga de traer lso datos y barir la coneccion a la bd mm ya veo
+			// pero puedes buscar otras alternativas 
+
+			var stream = crBillsReport.ExportToStream(CrystalDecisions.Shared.ExportFormatType.WordForWindows);
+			return File(stream, "application/doc", "Cotisacion.xls");
+			
 		}
 
 		private ReportClass GenerateBillsReport()
 		{
+			this.crBillsReport = new Reports.BillsReport();
+			Reports.DtsBill isDts = new Reports.DtsBill();
 			var connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 			var connection = new SqlConnection(connectionString);
 			var dataTable = new DataTable();
 			var sql = "Select * from Bills";
-
+			var milst = new List<Bill>();
 			try
 			{
 				connection.Open();
+
 				var Comand = new SqlCommand(sql, connection);
-				var adapter = new SqlDataAdapter(Comand);
-				adapter.Fill(dataTable);
+				SqlDataReader miRead = Comand.ExecuteReader();
+				if (miRead.HasRows)
+				{
+					while (miRead.Read())
+					{
+						Bill isBillObjet = new Bill();
+						isBillObjet.Bill_id = miRead.GetInt32(0);
+						isBillObjet.Nombres = miRead.GetString(1);
+						isBillObjet.Apaterno = miRead.GetString(2);
+						milst.Add(isBillObjet);
+					}
+				}
+
+				foreach (Bill item in milst)
+				{
+					isDts.DtBill.AddDtBillRow(item.Bill_id.ToString(), item.Nombres.ToString(),item.Apaterno.ToString());
+				}
+
+				//var adapter = new SqlDataAdapter(Comand);
+				//adapter.Fill(dataTable);
 			}
 			catch (Exception ex)
 			{
@@ -55,11 +95,35 @@ namespace Info_Net.Controllers
 				throw;
 			}
 
-			var report = new ReportClass();
-			report.FileName = Server.MapPath("/Reports/Bill.rpt");
-			report.Load();
-			report.SetDataSource(dataTable);
-			return report;
+			//var report = new ReportClass();
+			crBillsReport.FileName = Server.MapPath("/Reports/BillsReport.rpt");
+			crBillsReport.Load();
+			crBillsReport.SetDataSource(isDts);
+
+			
+
+
+
+
+
+
+
+
+
+			ExportOptions exportOptions = crBillsReport.ExportOptions;
+			DiskFileDestinationOptions diskFileDestinationOptions = new DiskFileDestinationOptions();
+			CrystalDecisions.Shared.PdfRtfWordFormatOptions formatTypeOptions = new PdfRtfWordFormatOptions();
+			//destino
+			diskFileDestinationOptions.DiskFileName = "MiReporte";
+			exportOptions.ExportDestinationType = ExportDestinationType.DiskFile;
+			exportOptions.ExportFormatType = ExportFormatType.PortableDocFormat;
+			exportOptions.DestinationOptions = diskFileDestinationOptions;
+			exportOptions.FormatOptions = formatTypeOptions;
+			crBillsReport.Export();//
+			//File(crBillsReport.Export(), "application/doc",)
+			//var stream = crBillsReport.ExportToStream(CrystalDecisions.Shared.ExportFormatType.WordForWindows);
+			//return File File(stream, "application/doc", "Cotisacion.xls");
+			return crBillsReport;
 		}
 
 		// GET: Bills
@@ -109,8 +173,9 @@ namespace Info_Net.Controllers
             return View(bill);
         }
 
-        // GET: Bills/Edit/5
-        public ActionResult Edit(int? id)
+		// GET: Bills/Edit/5
+		[Authorize(Roles = "Admin")]
+		public ActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -125,10 +190,11 @@ namespace Info_Net.Controllers
             return View(bill);
         }
 
-        // POST: Bills/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+		// POST: Bills/Edit/5
+		// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+		[Authorize(Roles = "Admin")]
+		[HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Bill_id,Nombres,Apaterno,Amaterno,Telefono,Email,Package_id,Calle,NumEx,Estado,Municipio,colonia")] Bill bill)
         {
@@ -142,8 +208,9 @@ namespace Info_Net.Controllers
             return View(bill);
         }
 
-        // GET: Bills/Delete/5
-        public ActionResult Delete(int? id)
+		// GET: Bills/Delete/5
+		[Authorize(Roles = "Admin")]
+		public ActionResult Delete(int? id)
         {
             if (id == null)
             {

@@ -47,6 +47,10 @@
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="GMaps, Version=4.1.0.6, Culture=neutral, PublicKeyToken=564d55b144e7aa5a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Subgurim.Maps.4.1.0.6\lib\net20\GMaps.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -210,6 +214,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Clases\DBHelper.cs" />
     <Compile Include="Clases\FilesHelper.cs" />
+    <Compile Include="Clases\MailHelper.cs" />
+    <Compile Include="Clases\UserHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BillsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -236,31 +242,69 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Bill.cs" />
-    <Compile Include="Models\Comment.cs" />
-    <Compile Include="Models\GoogleMarker.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\InfoNetContex.cs" />
-    <Compile Include="Models\MarkerRepository.cs" />
     <Compile Include="Models\Package.cs" />
     <Compile Include="Models\Publication.cs" />
     <Compile Include="Models\PublicationView.cs" />
     <Compile Include="Models\Response.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reports\Bill.cs">
+    <Compile Include="Reports\BillsReport1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Bill.rpt</DependentUpon>
+      <DependentUpon>BillsReport.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\DtsBill.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DtsBill.xsd</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\banner-master\css\style.css" />
+    <Content Include="Content\banner-master\images\Next-icon.png" />
+    <Content Include="Content\banner-master\images\Previous-icon.png" />
+    <Content Include="Content\banner-master\js\animate-effect.js" />
+    <Content Include="Content\banner-master\js\banner.js" />
+    <Content Include="Content\banner-master\js\jquery.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\Fotos\foto1.jpg" />
-    <Content Include="Content\Fotos\foto2.jpg" />
-    <Content Include="Content\Fotos\foto3.jpg" />
+    <Content Include="Content\images\feature-1.png" />
+    <Content Include="Content\images\feature-2.png" />
+    <Content Include="Content\images\feature-3.png" />
+    <Content Include="Content\images\feature-4.png" />
+    <Content Include="Content\images\feature-5.png" />
+    <Content Include="Content\images\feature-6.png" />
+    <Content Include="Content\images\feature-7.png" />
+    <Content Include="Content\images\feature-8.png" />
+    <Content Include="Content\images\figure-1.png" />
+    <Content Include="Content\images\figure-2.png" />
+    <Content Include="Content\images\figure-3.png" />
+    <Content Include="Content\images\hero-1.jpg" />
+    <Content Include="Content\images\hero-2.jpg" />
+    <Content Include="Content\images\hero-3.jpg" />
+    <Content Include="Content\images\imac.png" />
+    <Content Include="Content\images\logo-angular.svg" />
+    <Content Include="Content\images\logo-bootstrap.svg" />
+    <Content Include="Content\images\logo-css3.svg" />
+    <Content Include="Content\images\logo-html5.svg" />
+    <Content Include="Content\images\logo-icon.svg" />
+    <Content Include="Content\images\logo-jquery.svg" />
+    <Content Include="Content\images\logo-less.svg" />
+    <Content Include="Content\images\logo-sass.svg" />
+    <Content Include="Content\images\map.png" />
+    <Content Include="Content\images\map.svg" />
+    <Content Include="Content\images\profile-1.png" />
+    <Content Include="Content\images\profile-2.png" />
+    <Content Include="Content\images\profile-3.png" />
+    <Content Include="Content\images\profile-4.png" />
+    <Content Include="Content\images\team-1.png" />
+    <Content Include="Content\images\team-2.png" />
+    <Content Include="Content\styles.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -282,7 +326,19 @@
     <Content Include="DS.xss">
       <DependentUpon>DS.xsd</DependentUpon>
     </Content>
+    <Content Include="Reports\DtsBill.xsc">
+      <DependentUpon>DtsBill.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\DtsBill.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DtsBill.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Reports\DtsBill.xss">
+      <DependentUpon>DtsBill.xsd</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\fileupload.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -349,9 +405,12 @@
     <Content Include="Views\Publications\Index.cshtml" />
     <Content Include="Views\EnviarCorreo\EnviarCorreo.cshtml" />
     <Content Include="Views\EnviarCorreo\Index.cshtml" />
+    <Content Include="Views\Maps\maps.cshtml" />
+    <Content Include="Views\Packages\maps.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Fotos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -368,9 +427,9 @@
     <EmbeddedResource Include="Migrations\201706290339041_20172806.resx">
       <DependentUpon>201706290339041_20172806.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\Bill.rpt">
+    <EmbeddedResource Include="Reports\BillsReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>Bill.cs</LastGenOutput>
+      <LastGenOutput>BillsReport1.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

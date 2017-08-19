@@ -16,14 +16,14 @@ namespace Info_Net.Reports {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class Bill : ReportClass {
+    public class BillsReport : ReportClass {
         
-        public Bill() {
+        public BillsReport() {
         }
         
         public override string ResourceName {
             get {
-                return "Bill.rpt";
+                return "BillsReport.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace Info_Net.Reports {
         
         public override string FullResourceName {
             get {
-                return "Info_Net.Reports.Bill.rpt";
+                return "Info_Net.Reports.BillsReport.rpt";
             }
             set {
                 // Do nothing
@@ -90,9 +90,9 @@ namespace Info_Net.Reports {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedBill : Component, ICachedReport {
+    public class CachedBillsReport : Component, ICachedReport {
         
-        public CachedBill() {
+        public CachedBillsReport() {
         }
         
         [Browsable(false)]
@@ -129,7 +129,7 @@ namespace Info_Net.Reports {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            Bill rpt = new Bill();
+            BillsReport rpt = new BillsReport();
             rpt.Site = this.Site;
             return rpt;
         }

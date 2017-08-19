@@ -10,6 +10,7 @@ using Info_Net.Models;
 
 namespace Info_Net.Controllers
 {
+
     public class PackagesController : Controller
     {
         private InfoNetContex db = new InfoNetContex();
@@ -34,17 +35,22 @@ namespace Info_Net.Controllers
             }
             return View(package);
         }
-
-        // GET: Packages/Create
-        public ActionResult Create()
+		public ActionResult maps()
+		{
+			return View();
+		}
+		[Authorize(Roles = "Admin")]
+		// GET: Packages/Create
+		public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Packages/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+		// POST: Packages/Create
+		// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+		[Authorize(Roles = "Admin")]
+		[HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Package_id,NombrePack,Banda,Precio")] Package package)
         {
@@ -58,8 +64,9 @@ namespace Info_Net.Controllers
             return View(package);
         }
 
-        // GET: Packages/Edit/5
-        public ActionResult Edit(int? id)
+		[Authorize(Roles = "Admin")]
+		// GET: Packages/Edit/5
+		public ActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -73,10 +80,11 @@ namespace Info_Net.Controllers
             return View(package);
         }
 
-        // POST: Packages/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+		// POST: Packages/Edit/5
+		// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+		[Authorize(Roles = "Admin")]
+		[HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Package_id,NombrePack,Banda,Precio")] Package package)
         {
@@ -89,8 +97,9 @@ namespace Info_Net.Controllers
             return View(package);
         }
 
-        // GET: Packages/Delete/5
-        public ActionResult Delete(int? id)
+		// GET: Packages/Delete/5
+		[Authorize(Roles = "Admin")]
+		public ActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -104,8 +113,9 @@ namespace Info_Net.Controllers
             return View(package);
         }
 
-        // POST: Packages/Delete/5
-        [HttpPost, ActionName("Delete")]
+		// POST: Packages/Delete/5
+		[Authorize(Roles = "Admin")]
+		[HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {

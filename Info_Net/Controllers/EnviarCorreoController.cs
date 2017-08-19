@@ -34,15 +34,13 @@ namespace Info_Net.Controllers
 
 				//configurar los servidores smtp
 				//Hotmail
-				SmtpClient smtp = new SmtpClient();
-				smtp.Host = "smtp.live.com";
-				smtp.Port = 25;
-				smtp.EnableSsl = true;
-				smtp.UseDefaultCredentials = true;
-				string sCuentCorreo = "rafa696@live.com.mx";
-				string sPasswordCOrreo = "sabella";
-
-				smtp.Send(correo);
+				SmtpClient client = new SmtpClient("smtp.live.com", 587);
+                using (client)
+                {
+                    client.Credentials = new System.Net.NetworkCredential("rafa696@live.com.mx", "isabella");
+                    client.EnableSsl = true;
+                    client.Send(correo);
+                }
 				ViewBag.Mensaje = "Mensaje Enviado Correctamente";
 			}
 			catch (Exception ex)

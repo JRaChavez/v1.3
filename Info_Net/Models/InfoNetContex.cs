@@ -17,5 +17,6 @@ namespace Info_Net.Models
         public System.Data.Entity.DbSet<Info_Net.Models.Publication> Publications { get; set; }
 		public System.Data.Entity.DbSet<Info_Net.Models.Bill> Bills { get; set; }
 		public System.Data.Entity.DbSet<Info_Net.Models.Package> Packages { get; set; }
+		public System.Data.Entity.DbSet<Info_Net.Models.User > Users { get; set; }
 	}
 }

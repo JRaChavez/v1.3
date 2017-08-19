@@ -12,22 +12,26 @@ namespace Info_Net.Models
 		public int Bill_id { get; set; }
 
 		[Required(ErrorMessage = "the file {0} is required")]
+		[Display(Name ="Nombre del Solisitante")]
 		public string Nombres { get; set; }
 
 		[Required(ErrorMessage = "the file {0} is required")]
+		[Display(Name ="Apellido Paterno")]
 		public string Apaterno{ get; set; }
 
+		[Display(Name = "Apellido Paterno")]
 		public string Amaterno { get; set; }
 
 		[Required(ErrorMessage = "the file {0} is required")]
 		public int Telefono { get; set; }
 
 		[Required(ErrorMessage = "the file {0} is required")]
+		[Display(Name ="Correo electronico")]
 		public string Email { get; set; }
 
 		//paquete
 		[Required(ErrorMessage = "the file {0} is required")]
-		[Display(Name ="Packete")]
+		[Display(Name ="Seleccione un paquete")]
 		public int Package_id { get; set; }
 
 
@@ -36,6 +40,7 @@ namespace Info_Net.Models
 		public string Calle { get; set; }
 
 		[Required(ErrorMessage = "the file {0} is required")]
+		[Display(Name ="Numero de casa")]
 		public int NumEx { get; set; }
 
 		[Required(ErrorMessage = "the file {0} is required")]

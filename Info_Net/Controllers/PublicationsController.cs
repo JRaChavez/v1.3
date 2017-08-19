@@ -38,39 +38,58 @@ namespace Info_Net.Controllers
         }
 
         // GET: Publications/Create
-		[Authorize]
+		
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Publications/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+		// POST: Publications/Create
+		// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+		[Authorize(Roles = "Admin")]
+		[HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Publication_id,Nombre,Titulo,Description,Contenido,Imagen")] Publication publication)
+        public ActionResult Create(Publication publication)
         {
-			var pic = string.Empty;
-			var folder = "~/Content/Fotos";
-
-			if (view.ImagenFile != null)
-			{
-				pic = FilesHelper.UploadPhoto(view.ImagenFile, folder);
-				pic = string.Format("{0}/{1}", folder, pic);
-			}
-
 			if (ModelState.IsValid)
-            {
-                db.Publications.Add(publication);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+			{
 
-            return View(publication);
-        }
+				db.Publications.Add(publication);
+				var response = DBHelper.SaveChanges(db);
 
-        // GET: Publications/Edit/5
+				if (response.Succeded)
+				{
+					if (publication.ImagenFile != null)
+					{
+						var folder = "~/Content/Fotos";
+						var file = string.Format("{0}.jpg", publication.Publication_id);
+						var responsePhoto = FilesHelper.UploadPhoto(publication.ImagenFile, folder, file);
+
+						if (responsePhoto)
+						{
+							var pic = string.Format("{0}/{1}", folder, file);
+							publication.Imagen = pic;
+							db.Entry(publication).State = EntityState.Modified;
+							var responsePhotoUpload = DBHelper.SaveChanges(db);
+
+							if (responsePhotoUpload.Succeded)
+							{
+								return RedirectToAction("Index");
+							}
+
+							ModelState.AddModelError(string.Empty, responsePhotoUpload.Message);
+						}
+					}
+					return RedirectToAction("Index");
+				}
+				ModelState.AddModelError(string.Empty, response.Message);
+			}
+			return View(publication);
+		}
+
+		// GET: Publications/Edit/5
+		[Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -88,19 +107,41 @@ namespace Info_Net.Controllers
         // POST: Publications/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+		[Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Publication_id,Nombre,Titulo,Description,Contenido,Imagen")] Publication publication)
+        public ActionResult Edit(Publication publication)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(publication).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(publication);
-        }
+			if (ModelState.IsValid)
+			{
+				if (publication.ImagenFile != null)
+				{
+					var pic = string.Empty;
+					var folder = "~/Content/Fotos";
+					var file = string.Format("{0}.jpg", publication.Publication_id);
+					var responsePhoto = FilesHelper.UploadPhoto(publication.ImagenFile, folder, file);
 
+					if (responsePhoto)
+					{
+						pic = string.Format("{0}/{1}", folder, file);
+						publication.Imagen = pic;
+					}
+				}
+
+				db.Entry(publication).State = EntityState.Modified;
+
+				var responsePhotoUpload = DBHelper.SaveChanges(db);
+
+				if (responsePhotoUpload.Succeded)
+				{
+					return RedirectToAction("Index");
+				}
+				ModelState.AddModelError(string.Empty, responsePhotoUpload.Message);
+			}
+
+			return View(publication);
+        }
+		[Authorize]
         // GET: Publications/Delete/5
         public ActionResult Delete(int? id)
         {

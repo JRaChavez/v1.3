@@ -32,6 +32,8 @@ namespace Info_Net.Models
 		public string Contenido { get; set; }
 
 		[DataType(DataType.ImageUrl)]
+		[Required(ErrorMessage = "the file {0} is required")]
+		[Display(Name ="Imagen")]
 		public string Imagen { get; set; }
 
 		[NotMapped]

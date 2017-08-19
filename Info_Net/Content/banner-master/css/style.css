@@ -1,0 +1,30 @@
+body { color:white; }
+#header { overflow:hidden; position:relative; margin:20px auto; background:white; }
+#header ul { list-style:none; margin:0px; padding:0px; position:absolute; }
+#header ul li { list-style:none; margin:0px; padding:0px; left:10px; float:left; }
+    #header ul li div {
+    margin: 300px 0 0 500px;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-shadow:0 2px 2px #000;
+}
+#button, #button1
+{
+	position:absolute;
+	height:50px;
+	width:50px;
+	border:none;
+	cursor:pointer;
+	border-radius:25px;
+	background-color: black;
+	opacity:0.1;
+	filter:alpha(opacity=10);
+}
+#button:hover, #button1:hover{ opacity:0.6; filter:alpha(opacity=60); }
+
+.next {
+    right: 5px;
+    background-image: url('../images/Next-icon.png');
+    background-repeat: no-repeat;
+}
+.prev { left:5px; background-image:url('../images/Previous-icon.png'); background-repeat: no-repeat;}

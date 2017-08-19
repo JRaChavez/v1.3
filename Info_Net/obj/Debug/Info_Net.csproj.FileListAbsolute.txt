@@ -127,6 +127,7 @@ C:\Users\rafa6\OneDrive\Documentos\9° Grado\Prgramacion de Aplicaciones\Proyect
 C:\Users\rafa6\OneDrive\Documentos\9° Grado\Prgramacion de Aplicaciones\Proyecto\v1.3\Info_Net\bin\CrystalDecisions.Shared.dll
 C:\Users\rafa6\OneDrive\Documentos\9° Grado\Prgramacion de Aplicaciones\Proyecto\v1.3\Info_Net\bin\EntityFramework.dll
 C:\Users\rafa6\OneDrive\Documentos\9° Grado\Prgramacion de Aplicaciones\Proyecto\v1.3\Info_Net\bin\EntityFramework.SqlServer.dll
+C:\Users\rafa6\OneDrive\Documentos\9° Grado\Prgramacion de Aplicaciones\Proyecto\v1.3\Info_Net\bin\GMaps.dll
 C:\Users\rafa6\OneDrive\Documentos\9° Grado\Prgramacion de Aplicaciones\Proyecto\v1.3\Info_Net\bin\Microsoft.AI.Agent.Intercept.dll
 C:\Users\rafa6\OneDrive\Documentos\9° Grado\Prgramacion de Aplicaciones\Proyecto\v1.3\Info_Net\bin\Microsoft.AI.DependencyCollector.dll
 C:\Users\rafa6\OneDrive\Documentos\9° Grado\Prgramacion de Aplicaciones\Proyecto\v1.3\Info_Net\bin\Microsoft.AI.PerfCounterCollector.dll
@@ -206,9 +207,9 @@ C:\Users\rafa6\OneDrive\Documentos\9° Grado\Prgramacion de Aplicaciones\Proyect
 C:\Users\rafa6\OneDrive\Documentos\9° Grado\Prgramacion de Aplicaciones\Proyecto\v1.3\Info_Net\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\rafa6\OneDrive\Documentos\9° Grado\Prgramacion de Aplicaciones\Proyecto\v1.3\Info_Net\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\rafa6\OneDrive\Documentos\9° Grado\Prgramacion de Aplicaciones\Proyecto\v1.3\Info_Net\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\rafa6\OneDrive\Documentos\9° Grado\Prgramacion de Aplicaciones\Proyecto\v1.3\Info_Net\obj\Debug\Info_Net.csprojResolveAssemblyReference.cache
 C:\Users\rafa6\OneDrive\Documentos\9° Grado\Prgramacion de Aplicaciones\Proyecto\v1.3\Info_Net\obj\Debug\Info_Net.Migrations.InitialCreate.resources
 C:\Users\rafa6\OneDrive\Documentos\9° Grado\Prgramacion de Aplicaciones\Proyecto\v1.3\Info_Net\obj\Debug\Info_Net.Migrations._20172806.resources
 C:\Users\rafa6\OneDrive\Documentos\9° Grado\Prgramacion de Aplicaciones\Proyecto\v1.3\Info_Net\obj\Debug\Info_Net.csproj.GenerateResource.Cache
 C:\Users\rafa6\OneDrive\Documentos\9° Grado\Prgramacion de Aplicaciones\Proyecto\v1.3\Info_Net\obj\Debug\Info_Net.dll
 C:\Users\rafa6\OneDrive\Documentos\9° Grado\Prgramacion de Aplicaciones\Proyecto\v1.3\Info_Net\obj\Debug\Info_Net.pdb
+C:\Users\rafa6\OneDrive\Documentos\9° Grado\Prgramacion de Aplicaciones\Proyecto\v1.3\Info_Net\obj\Debug\Info_Net.csprojResolveAssemblyReference.cache

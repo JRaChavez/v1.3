@@ -7,6 +7,72 @@
 </head>
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
+<html>
+<head>
+	<style>
+		#map {
+			height: 400px;
+			width: 100%;
+		}
+	</style>
+</head>
+
+<body>
+	<div>
+		<form method="post" enctype="multipart/form-data" style="width:600px">
+			<div>
+				<label>Introduce tu correo</label>
+				<input class="form-control" type="email" name="Para" placeholder="Email" />
+			</div>
+			<br />
+			<div>
+				<label>Asunto</label>
+				<input class="form-control" type="text" name="Asunto" placeholder="Subject" />
+			</div>
+			<div>
+				<label>Mensaje</label>
+				<br />
+				<textarea style="width:600px;height:150px;" name="Mensaje" placeholder="Escriba su mensaje"></textarea>
+			</div>
+			<br />
+			<div>
+				<button id="enviar" class="btn btn-primary" type="submit">Enviar correo</button>
+			</div>
+		</form>
+		<h3 style="color:blue">
+			@ViewBag.Mensaje
+		</h3>
+		<h3 style="color:red">
+			@ViewBag.Enviar
+		</h3>
+	</div>
+
+	<div>
+		<h3>My Google Maps Demo</h3>
+		<div id="map"></div>
+		<script>
+			function initMap() {
+				var uluru = {
+					lat: 18.602109, lng: -98.46435
+				};
+				var map = new google.maps.Map(document.getElementById('map'), {
+					zoom: 20,
+					center: uluru
+				});
+				var marker = new google.maps.Marker({
+					position: uluru,
+					map: map
+				});
+			}
+		</script>
+		<script async defer
+				src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB31d243huy6AZu2ppfqii0Ew9nBej40dg&callback=initMap">
+		</script>
+		</div>
+</body>
+</html>
+
+
 
 <address>
     One Microsoft Way<br />
@@ -14,6 +80,7 @@
     <abbr title="Phone">P:</abbr>
     425.555.0100
 </address>
+
 
 <address>
     <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />

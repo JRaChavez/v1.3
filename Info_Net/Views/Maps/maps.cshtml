@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "Mapa";
+}
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8" />
+	<title>MAPA</title>
+	<script type="text/javascript" src=
+			"http://maps.googleapis.com/maps/api/js/js?v3"></script>
+</head>
+<body>
+	<h1	>Mapa</h1>
+	<div id="mapa" style="width:800px; height:500px">
+
+	</div>
+	<script type="text/javascript">
+		//name espace
+		var divMapa = document.getElementById('mapa');
+		navigator.geolocation.getCurrentPosition(fn_ok, fn_mal);
+		function fn_mal() { }
+		function fn_ok(rta)
+		{
+			var lat = rta.coords.latitude;
+			var lon = rta.coords.longitude;
+
+			var gLatLon = new google.masps.LatIng(lat, lon);
+			var objConfig =
+				{
+					zoom: 17,
+					center: gLatLon
+				}
+			var gMapa = new google.masps.Map(divMapa, objConfig);
+
+			var objConfigMarker = 
+				{
+					position: gLatLon,
+					map: gMapa,
+					title: "USTED ESTA AUI"
+
+				}
+			var gMarker = new google.masps.Marker(objConfigMarker);
+		}
+	</script>	
+</body>
+</html>
+
